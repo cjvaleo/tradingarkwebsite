@@ -661,3 +661,274 @@ main > section { padding-block: clamp(4rem, 10vh, 8rem); }
 @media (max-width: 768px) {
   .hiw-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   COMMUNITY / SOCIAL PROOF — Step 7
+   Discord chat mock. Radial gold glow bottom-left.
+   ============================================================ */
+#community {
+  background:
+    radial-gradient(ellipse 1000px 700px at 10% 90%, rgba(174, 134, 37, 0.10), transparent 55%),
+    var(--night);
+  padding-block: clamp(80px, 12vh, 140px);
+}
+
+.community-container {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.community-header {
+  margin-bottom: 64px;
+}
+
+.community-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--g-ed);
+}
+
+.community-headline {
+  font-size: clamp(48px, 6vw, 88px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--cream);
+  margin-top: 1.5rem;
+}
+
+.community-headline .line-italic {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+
+.community-sub {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 18px;
+  color: var(--cream-2);
+  line-height: 1.5;
+  max-width: 540px;
+  margin-top: 16px;
+}
+
+/* ---- Discord mock shell ---- */
+.discord-mock {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 0;
+  border: 1px solid var(--carbon);
+  overflow: hidden;
+  max-width: 980px;
+  margin: 0 auto;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Sidebar ---- */
+.discord-sidebar {
+  background: var(--night-3);
+  border-right: 1px solid var(--carbon);
+  padding: 20px 16px;
+}
+
+.discord-server-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--cream);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--carbon);
+  margin-bottom: 16px;
+}
+
+.discord-section-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-3);
+  margin: 0 0 8px;
+}
+
+.discord-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.discord-channel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--cream-3);
+  padding: 6px 8px;
+}
+
+.discord-hash { color: var(--cream-4); flex-shrink: 0; }
+
+.discord-channel--active {
+  background: var(--carbon);
+  color: var(--cream);
+}
+.discord-channel--active .discord-hash { color: var(--cream-3); }
+
+/* ---- Channel pane ---- */
+.discord-channel-pane {
+  display: flex;
+  flex-direction: column;
+  background: var(--night-2);
+}
+
+.discord-channel-header {
+  background: var(--night-2);
+  border-bottom: 1px solid var(--carbon);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.discord-ch-name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--cream);
+}
+
+.discord-hash--header {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--cream-4);
+}
+
+.discord-member-count {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream-3);
+}
+
+/* ---- Messages ---- */
+.discord-messages {
+  flex: 1;
+  padding: 24px 20px;
+}
+
+.discord-msg {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.discord-msg:last-child { margin-bottom: 0; }
+
+.discord-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--g-ed), var(--g-ae));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--night);
+  user-select: none;
+}
+
+.discord-msg-body { flex: 1; min-width: 0; }
+
+.discord-msg-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.discord-username {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--cream);
+  line-height: 1;
+}
+
+.discord-ts {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--cream-4);
+}
+
+.discord-msg-text {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--cream-2);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+/* ---- Stat strip ---- */
+.community-stats {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 64px;
+  margin-top: 40px;
+}
+
+.community-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--g-ed);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cream-3);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .discord-mock          { grid-template-columns: 1fr; }
+  .discord-sidebar       { display: none; }
+  .community-stats       { gap: 40px; flex-wrap: wrap; }
+}
