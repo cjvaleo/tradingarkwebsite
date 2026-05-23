@@ -538,3 +538,126 @@ main > section { padding-block: clamp(4rem, 10vh, 8rem); }
   .bento-box--5,
   .bento-box--6 { grid-column: 1 / -1; }
 }
+
+/* ============================================================
+   HOW IT WORKS — Step 6
+   Solid --night-2, no glow. Hairline --carbon dividers between steps.
+   ============================================================ */
+#how-it-works {
+  background: var(--night-2);
+  border-top: 1px solid var(--carbon);
+  border-bottom: 1px solid var(--carbon);
+  padding-block: clamp(80px, 12vh, 140px);
+}
+
+.hiw-container {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.hiw-header {
+  margin-bottom: 80px;
+}
+
+.hiw-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--g-ed);
+}
+
+.hiw-headline {
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--cream);
+  margin-top: 1.5rem;
+}
+
+.hiw-headline .line-italic {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+
+/* 3-col grid: --carbon background + 1px gap = hairline dividers */
+.hiw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--carbon);
+}
+
+.hiw-step {
+  background: var(--night-2);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hiw-step-number {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--g-ed);
+  margin: 0;
+}
+
+.hiw-step-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cream-3);
+  margin: 16px 0 0;
+}
+
+.hiw-step-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--cream);
+  margin: 12px 0 0;
+}
+
+.hiw-step-desc {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--cream-2);
+  line-height: 1.5;
+  margin: 16px 0 0;
+  max-width: 320px;
+}
+
+/* Tag floats to the bottom of the flex column */
+.hiw-step-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--g-ed);
+  border-top: 1px solid var(--carbon);
+  padding-top: 24px;
+  margin-top: auto;
+}
+
+/* Mobile: single column, dividers become horizontal */
+@media (max-width: 768px) {
+  .hiw-grid { grid-template-columns: 1fr; }
+}
