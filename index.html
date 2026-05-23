@@ -818,40 +818,46 @@
   }
 
   /* SOCIALS */
-  .socials{
+  .socials, .nav-socials{
     display: inline-flex;
     align-items: center;
-    gap: 4px;
   }
-  .socials a{
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 34px; height: 34px;
-    color: var(--ink-dim);
-    transition: all .25s ease;
-    text-decoration: none;
-  }
-  .socials a:hover{
-    color: var(--gold-4);
-    transform: translateY(-1px);
-  }
-  .socials a svg{
-    width: 16px; height: 16px;
-  }
-  /* nav variant */
+  .socials{ gap: 4px; }
   .nav-socials{
-    display: inline-flex;
-    align-items: center;
     gap: 2px;
     margin-right: 14px;
     padding-right: 14px;
     border-right: 1px solid var(--line);
   }
-  .nav-socials a{
-    width: 30px; height: 30px;
+  .socials a, .nav-socials a{
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px;
+    color: var(--gold-4) !important;
+    transition: color .25s ease, transform .25s ease;
+    text-decoration: none;
   }
-  .nav-socials a svg{
-    width: 14px; height: 14px;
+  .nav-socials a{ width: 30px; height: 30px; }
+
+  .socials a:hover, .nav-socials a:hover{
+    color: var(--gold-2) !important;
+    transform: translateY(-1px);
   }
+
+  /* force all SVG strokes AND fills to inherit the link color */
+  .socials a svg, .nav-socials a svg{
+    width: 16px; height: 16px;
+    color: inherit;
+    stroke: currentColor;
+    fill: currentColor;
+  }
+  .nav-socials a svg{ width: 14px; height: 14px; }
+
+  /* Instagram is the only outline-only icon — keep it stroke-only */
+  .socials a[aria-label="Instagram"] svg,
+  .nav-socials a[aria-label="Instagram"] svg{
+    fill: none;
+  }
+
   @media(max-width: 600px){
     .nav-socials{ display: none; }
   }
