@@ -1175,3 +1175,157 @@ main > section { padding-block: clamp(4rem, 10vh, 8rem); }
 @media (max-width: 768px) {
   .pricing-card { padding: 36px 24px; }
 }
+
+/* ============================================================
+   FAQ ACCORDION — Step 9
+   Solid --night-2, no glow. Native <details>/<summary>, no JS.
+   ============================================================ */
+#faq {
+  background: var(--night-2);
+  border-top: 1px solid var(--carbon);
+  border-bottom: 1px solid var(--carbon);
+  padding-block: clamp(80px, 12vh, 140px);
+}
+
+.faq-container {
+  max-width: 880px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Section header */
+.faq-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.faq-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--g-ed);
+}
+
+.faq-headline {
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--cream);
+  margin-top: 1.5rem;
+}
+
+.faq-headline .line-italic {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+
+/* Accordion: hairline borders between items */
+.faq-item {
+  border-top: 1px solid var(--carbon);
+  padding: 28px 0;
+}
+
+.faq-item:first-child { border-top: 0; }
+.faq-item:last-child  { border-bottom: 1px solid var(--carbon); }
+
+/* Strip the native disclosure triangle */
+.faq-summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  cursor: pointer;
+}
+.faq-summary::-webkit-details-marker { display: none; }
+
+/* Question text */
+.faq-question {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.faq-summary:hover .faq-question { color: var(--g-ed); }
+
+/* Open state: question stays gold */
+.faq-item[open] > .faq-summary .faq-question { color: var(--g-ed); }
+
+/* Toggle: + rotates 45° to × when open */
+.faq-summary::after {
+  content: '+';
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 24px;
+  color: var(--g-ed);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] > .faq-summary::after { transform: rotate(45deg); }
+
+/* Answer body */
+.faq-answer {
+  padding: 0 0 8px;
+  max-width: 720px;
+}
+
+.faq-answer p {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--cream-2);
+  margin: 0;
+}
+
+.faq-answer p:first-child { margin-top: 8px; }
+
+/* Final nudge */
+.faq-nudge {
+  margin-top: 64px;
+  text-align: center;
+}
+
+.faq-nudge-line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  color: var(--cream-2);
+}
+
+.faq-nudge-link {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--g-ed);
+  text-decoration: none;
+  margin-top: 12px;
+  transition: text-decoration 0.15s ease;
+}
+
+.faq-nudge-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
