@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trading Ark — Premium Trading Community</title>
+  <meta name="description" content="Live trading calls, structured education, and the Rewind Journal — built into one community that actually teaches you the process." />
+  <meta name="theme-color" content="#0A0806" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Trading Ark — Premium Trading Community" />
+  <meta property="og:description" content="Stop chasing signals. Learn to read the market." />
+  <meta property="og:image" content="/assets/img/og-image.jpg" /> <!-- TODO: 1200x630 share preview -->
+  <meta property="og:url" content="https://tradingark.com/" /> <!-- TODO: real domain -->
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Trading Ark — Premium Trading Community" />
+  <meta name="twitter:description" content="Stop chasing signals. Learn to read the market." />
+  <meta name="twitter:image" content="/assets/img/og-image.jpg" /> <!-- TODO -->
+
+  <!-- Icons -->
+  <link rel="icon" href="/assets/img/favicon.ico" /> <!-- TODO: favicon -->
+  <link rel="apple-touch-icon" href="/assets/img/logo.svg" /> <!-- TODO: logo svg -->
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+  <style>
+    /* ============================================================
+       BRAND TOKENS — locked, do not improvise
+       ============================================================ */
+    :root {
+      /* DUSK PALETTE */
+      --night:    #0A0806;  /* primary surface */
+      --night-2:  #14110D;  /* card surface */
+      --night-3:  #1C1812;  /* elevated */
+      --carbon:   #2A241C;  /* borders */
+
+      /* CREAM (text on dark) */
+      --cream:    #EDE6D6;  /* primary text */
+      --cream-2:  #C9C0AB;  /* secondary */
+      --cream-3:  #8A8068;  /* tertiary */
+      --cream-4:  #5A523F;  /* quiet */
+
+      /* GOLD (exact palette — do not adjust) */
+      --g-ae:     #AE8625;
+      --g-d2:     #D2AC47;
+      --g-ed:     #EDC967;
+      --g-f7:     #F7EF8A;
+      --g-92:     #926F34;
+
+      /* SEMANTIC */
+      --profit:   #7A9E5E;
+      --loss:     #B5564A;
+
+      /* TYPOGRAPHY */
+      --font-display: 'Fraunces', serif;
+      --font-sans:    'Inter', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
+      /* LAYOUT */
+      --container: 1200px;
+      --gutter:    clamp(1rem, 4vw, 2rem);
+    }
+
+    /* ============================================================
+       RESET / BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--night);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    img, svg, video { display: block; max-width: 100%; height: auto; }
+
+    a { color: inherit; text-decoration: none; }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      background: none;
+      border: 0;
+      color: inherit;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    p { margin: 0; }
+    ul, ol { margin: 0; padding: 0; list-style: none; }
+
+    /* ============================================================
+       BRAND UTILITIES (locked treatments)
+       ============================================================ */
+    .gold-gradient {
+      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
+      -webkit-background-clip: text;
+              background-clip: text;
+      -webkit-text-fill-color: transparent;
+              color: transparent;
+    }
+
+    .italic-accent {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+    }
+
+    /* ============================================================
+       LAYOUT PRIMITIVES
+       ============================================================ */
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    main > section { padding-block: clamp(4rem, 10vh, 8rem); }
+
+    /* ============================================================
+       ACCESSIBILITY
+       ============================================================ */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--g-d2);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. NAV — Step 2 -->
+  <header id="nav" class="site-nav" role="banner">
+    <!-- TODO Step 2: sticky, transparent → solid on scroll. Logo left, links center, primary CTA right. -->
+  </header>
+
+  <main id="main">
+
+    <!-- 2. HERO — Step 3 -->
+    <section id="hero">
+      <!-- TODO Step 3: eyebrow, headline w/ gold gradient + italic accent, subhead, 2 CTAs (Whop primary, Discord secondary), trust strip. -->
+    </section>
+
+    <!-- 3. PROBLEM / PROMISE -->
+    <section id="problem">
+      <!-- TODO: "Most traders are stuck in signal hell." → the alternative. One screen. -->
+    </section>
+
+    <!-- 4. WHAT YOU GET — Bento — Step 4 -->
+    <section id="what-you-get">
+      <!-- TODO Step 4: 6-box asymmetric bento grid (Live Calls / Weekly Education / Library / Rewind Journal / Community / Market Updates). -->
+    </section>
+
+    <!-- 5. HOW IT WORKS — Step 5 -->
+    <section id="how-it-works">
+      <!-- TODO Step 5: 3 numbered horizontal steps — Join / Learn / Execute. -->
+    </section>
+
+    <!-- 6. SOCIAL PROOF — Discord chat mock — Step 6 -->
+    <section id="social-proof">
+      <!-- TODO Step 6: single-column Discord-style chat mock with gold-on-dark monogram avatars + timestamps. -->
+    </section>
+
+    <!-- 7. PRICING / CTA — Step 7 -->
+    <section id="pricing">
+      <!-- TODO Step 7: one centered card. 6-item checklist + gold Whop CTA + secondary "Free Discord" link. Price = [TBD]. -->
+    </section>
+
+    <!-- 8. FAQ — Step 8 -->
+    <section id="faq">
+      <!-- TODO Step 8: accordion of 6 questions. aria-expanded, keyboard accessible, no library. -->
+    </section>
+
+  </main>
+
+  <!-- 9. FOOTER — Step 9 -->
+  <footer id="footer" role="contentinfo">
+    <!-- TODO Step 9: single compact row. -->
+  </footer>
+
+  <!-- TODO Step 10 (visual polish pass): film grain overlay + radial gold glows. -->
+  <!-- TODO JS: nav scroll state, FAQ accordion, smooth scroll. Inline first, extract to /assets/js/main.js once index.html passes ~600 lines. -->
+
+</body>
+</html>
