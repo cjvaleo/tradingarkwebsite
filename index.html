@@ -169,7 +169,7 @@
       border-radius: 0;
       cursor: pointer;
       white-space: nowrap;
-      transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
+      transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease, color 200ms ease;
     }
 
     .btn-gold {
@@ -311,7 +311,7 @@
     <div class="nav-inner container">
 
       <a href="#" class="nav-brand" aria-label="Trading Ark — home">
-        <!-- TODO: replace with real logo SVG once Christian provides /assets/img/logo.svg -->
+        <!-- TODO: single-tag swap → replace this <span> with <img class="nav-logo" src="/assets/img/logo.svg" alt="" width="28" height="28"> when real logo lands. -->
         <span class="nav-logo" aria-hidden="true">
           <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14 3.5 L24.5 24 L3.5 24 Z" stroke="#D2AC47" stroke-width="1.5" stroke-linejoin="round"/>
@@ -325,7 +325,7 @@
         <ul>
           <li><a href="#what-you-get">The Work</a></li>
           <li><a href="#pricing">Premium</a></li>
-          <li><a href="https://rewind.trading" target="_blank" rel="noopener">Rewind</a></li> <!-- TODO: confirm Rewind URL -->
+          <li><a href="#what-you-get">Rewind</a></li> <!-- Rewind Journal is a perk inside Premium; anchors to the bento. Tighten to #rewind once that bento box has its own id. -->
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </nav>
