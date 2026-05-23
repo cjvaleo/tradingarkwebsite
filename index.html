@@ -78,6 +78,7 @@
     }
 
     body {
+      position: relative;
       margin: 0;
       background: var(--night);
       color: var(--cream);
@@ -85,9 +86,22 @@
       font-weight: 400;
       font-size: 16px;
       line-height: 1.55;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
+    }
+
+    /* Film grain overlay — fixed, on top of everything, non-interactive */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      pointer-events: none;
+      opacity: 0.06;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
     }
 
     img, svg, video { display: block; max-width: 100%; height: auto; }
@@ -169,7 +183,7 @@
       border-radius: 0;
       cursor: pointer;
       white-space: nowrap;
-      transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease, color 200ms ease;
+      transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease, color 200ms ease, background-color 200ms ease;
     }
 
     .btn-gold {
@@ -189,6 +203,19 @@
     }
 
     .btn-gold:active { transform: translateY(0); filter: brightness(0.98); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      box-shadow: inset 0 0 0 1px var(--carbon);
+    }
+
+    .btn-ghost:hover {
+      box-shadow: inset 0 0 0 1px var(--cream-3);
+      background-color: rgba(237, 230, 214, 0.04);
+    }
+
+    .btn-ghost:active { transform: translateY(0); }
 
     /* ============================================================
        NAV — sticky, transparent → solid on scroll
@@ -276,6 +303,130 @@
     }
 
     /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-block: clamp(5rem, 10vh, 8rem) clamp(4rem, 8vh, 6rem);
+      overflow: hidden;
+      background-image:
+        radial-gradient(ellipse 900px 700px at 100% 0%,  rgba(174, 134, 37, 0.15), transparent 55%),
+        radial-gradient(ellipse 900px 700px at 0%   100%, rgba(174, 134, 37, 0.15), transparent 55%);
+    }
+
+    .hero-inner { position: relative; z-index: 1; width: 100%; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      position: relative;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--g-ed);
+      padding-bottom: 0.875rem;
+      margin-bottom: clamp(1.5rem, 3vh, 2.25rem);
+    }
+
+    .hero-eyebrow .lead { margin-right: 0.5em; color: var(--g-ed); }
+
+    .hero-eyebrow::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--g-ed), var(--g-ae));
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(80px, 13vw, 200px);
+      line-height: 0.82;
+      letter-spacing: -0.05em;
+      color: var(--cream);
+      margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+      overflow-wrap: break-word;
+    }
+
+    .hero-title-1,
+    .hero-title-2 { display: block; }
+
+    .hero-title-2 {
+      font-weight: 300;
+      font-style: italic;
+      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
+      -webkit-background-clip: text;
+              background-clip: text;
+      -webkit-text-fill-color: transparent;
+              color: transparent;
+    }
+
+    .hero-sub {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(18px, 1.6vw, 22px);
+      line-height: 1.45;
+      color: var(--cream);
+      max-width: 540px;
+      margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+    }
+
+    .hero-sub em {
+      font-style: italic;
+      font-weight: 300;
+      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
+      -webkit-background-clip: text;
+              background-clip: text;
+      -webkit-text-fill-color: transparent;
+              color: transparent;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.875rem;
+      margin-bottom: clamp(2rem, 5vh, 2.75rem);
+    }
+
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.875rem 1.75rem;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+    }
+
+    .hero-trust li { position: relative; }
+    .hero-trust li:not(:last-child)::after {
+      content: '·';
+      position: absolute;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--cream-4);
+    }
+
+    @media (max-width: 640px) {
+      .hero-ctas { width: 100%; }
+      .hero-ctas .btn { flex: 1 1 100%; }
+      .hero-trust { gap: 0.625rem 1.25rem; }
+      .hero-trust li:not(:last-child)::after { right: -0.75rem; }
+    }
+
+    /* ============================================================
        ACCESSIBILITY
        ============================================================ */
     .sr-only {
@@ -339,9 +490,39 @@
 
   <main id="main">
 
-    <!-- 2. HERO — Step 3 -->
-    <section id="hero">
-      <!-- TODO Step 3: eyebrow, headline w/ gold gradient + italic accent, subhead, 2 CTAs (Whop primary, Discord secondary), trust strip. -->
+    <!-- 2. HERO -->
+    <section id="hero" class="hero">
+      <div class="hero-inner container">
+
+        <p class="hero-eyebrow">
+          <span class="lead" aria-hidden="true">—</span>Trading Ark · Premium Community
+        </p>
+
+        <h1 class="hero-title">
+          <span class="hero-title-1">Stop chasing signals.</span>
+          <span class="hero-title-2">Learn to read the market.</span>
+        </h1>
+
+        <p class="hero-sub">
+          Live trading calls, structured education, and the Rewind Journal — built into one community <em>that actually teaches you the process.</em>
+        </p>
+
+        <div class="hero-ctas">
+          <a href="https://whop.com/trading-ark" class="btn btn-gold" target="_blank" rel="noopener">
+            Join Premium <span aria-hidden="true">→</span>
+          </a>
+          <a href="https://discord.gg/tradingark" class="btn btn-ghost" target="_blank" rel="noopener">
+            Free Discord
+          </a>
+        </div>
+
+        <ul class="hero-trust" aria-label="What's included">
+          <li>1–2 Live Calls Daily</li>
+          <li>Weekly Education</li>
+          <li>Rewind Journal Included</li>
+        </ul>
+
+      </div>
     </section>
 
     <!-- 3. PROBLEM / PROMISE -->
@@ -380,8 +561,6 @@
   <footer id="footer" role="contentinfo">
     <!-- TODO Step 9: single compact row. -->
   </footer>
-
-  <!-- TODO Step 10 (visual polish pass): film grain overlay + radial gold glows. -->
 
   <script>
     /* ============================================================
