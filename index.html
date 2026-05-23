@@ -99,7 +99,7 @@
     box-shadow: 0 10px 30px -8px rgba(212,175,55,.5);
   }
 
-  /* ───── HERO ───── */
+  /* ───── HERO (3D coin in vortex) ───── */
   .hero{
     min-height: 100vh;
     display:flex; align-items: center; justify-content: center;
@@ -108,124 +108,107 @@
     overflow: hidden;
     text-align: center;
     width: 100%;
+    perspective: 1500px;
+    perspective-origin: 50% 36%;
   }
   .hero-bg{
-    position:absolute; inset:0; z-index: -3;
+    position:absolute; inset:0; z-index: 0;
     background: url('assets/hero-desk.png') center/cover no-repeat;
   }
-  .hero-bg::after{
-    content:''; position:absolute; inset:0;
-    background:
-      linear-gradient(180deg, rgba(7,7,10,.45) 0%, rgba(7,7,10,.65) 70%, var(--bg) 100%);
-  }
-  .hero-grid-bg{ display: none; }
-  .hero-glow{
-    position:absolute; left:50%; top: 50%;
-    transform: translate(-50%,-50%);
-    width: 900px; height: 900px; z-index:-1;
-    background: radial-gradient(circle, rgba(247,239,138,.22) 0%, rgba(212,175,55,.08) 35%, transparent 65%);
-    filter: blur(60px); pointer-events: none;
-  }
 
-  /* DECORATIVE SIDE ELEMENTS — gold corner accents */
-  .hero-deco{
+  /* L1: Halo glow in pocket area */
+  .pocket-halo{
     position: absolute;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0;
-    animation: fadeUp 1.4s 1s forwards;
-  }
-  .hero-deco-tl{
-    top: 110px; left: 40px;
-    width: 60px; height: 60px;
-    border-top: 1px solid var(--gold-3);
-    border-left: 1px solid var(--gold-3);
-  }
-  .hero-deco-tr{
-    top: 110px; right: 40px;
-    width: 60px; height: 60px;
-    border-top: 1px solid var(--gold-3);
-    border-right: 1px solid var(--gold-3);
-  }
-  .hero-deco-bl{
-    bottom: 70px; left: 40px;
-    width: 60px; height: 60px;
-    border-bottom: 1px solid var(--gold-3);
-    border-left: 1px solid var(--gold-3);
-  }
-  .hero-deco-br{
-    bottom: 70px; right: 40px;
-    width: 60px; height: 60px;
-    border-bottom: 1px solid var(--gold-3);
-    border-right: 1px solid var(--gold-3);
-  }
-  @media(max-width:600px){
-    .hero-deco-tl, .hero-deco-tr, .hero-deco-bl, .hero-deco-br{
-      width: 32px; height: 32px;
-      top: 90px; bottom: 90px; left: 20px; right: 20px;
-    }
-    .hero-deco-tr, .hero-deco-br{ left: auto; }
-    .hero-deco-bl, .hero-deco-br{ top: auto; }
-  }
-
-  /* SIDE LABELS — like trading terminal corners */
-  .hero-side-label{
-    position: absolute;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
-    color: var(--ink-mute);
-    z-index: 1;
-    opacity: 0;
-    animation: fadeUp 1.4s 1.2s forwards;
-  }
-  .hero-side-label.left{
-    top: 50%; left: 40px;
-    transform: translateY(-50%) rotate(-90deg);
-    transform-origin: left center;
-    white-space: nowrap;
-  }
-  .hero-side-label.right{
-    top: 50%; right: 40px;
-    transform: translateY(-50%) rotate(90deg);
-    transform-origin: right center;
-    white-space: nowrap;
-  }
-  @media(max-width:880px){
-    .hero-side-label{ display: none; }
-  }
-
-  /* GIANT TA MARK WATERMARK BEHIND TEXT */
-  .hero-mark-bg{
-    position: absolute;
-    left: 50%; top: 50%;
+    top: 32%;
+    left: 50%;
+    width: 280px;
+    height: 280px;
     transform: translate(-50%, -50%);
-    width: min(720px, 90vw);
-    height: min(720px, 90vw);
-    z-index: -1;
+    z-index: 1;
+    background: radial-gradient(circle at 50% 35%, rgba(247,239,138,.35) 0%, rgba(237,201,103,.1) 35%, transparent 60%);
+    filter: blur(20px);
     pointer-events: none;
-    opacity: 0;
-    animation: markIn 2s .3s cubic-bezier(.2,.8,.2,1) forwards;
+    animation: haloPulse 3s ease-in-out infinite alternate;
   }
-  .hero-mark-bg img{
-    width: 100%; height: 100%;
-    object-fit: contain;
-    opacity: .35;
-    filter: drop-shadow(0 0 80px rgba(237,201,103,.5));
+  @keyframes haloPulse {
+    from { opacity: .7; }
+    to { opacity: 1; }
   }
-  @keyframes markIn{
-    0%{ opacity: 0; transform: translate(-50%,-50%) scale(.85); }
-    100%{ opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+  /* L2: 3D COIN */
+  .floating-stage{
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    width: 190px;
+    height: 190px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    animation: coinBounce 5s cubic-bezier(.4,0,.6,1) infinite;
+    will-change: transform;
   }
+  .coin {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: coinSpin 10s linear infinite;
+    will-change: transform;
+  }
+  .coin-face {
+    position: absolute;
+    inset: 0;
+    background: url('assets/logo-mark.png') center/contain no-repeat;
+    backface-visibility: visible;
+    will-change: transform;
+  }
+  .coin-face:nth-child(1) { transform: translateZ(12px);  filter: brightness(1.05) drop-shadow(0 0 25px rgba(237,201,103,.7)); }
+  .coin-face:nth-child(2) { transform: translateZ(9px);   filter: brightness(0.92); }
+  .coin-face:nth-child(3) { transform: translateZ(6px);   filter: brightness(0.82); }
+  .coin-face:nth-child(4) { transform: translateZ(3px);   filter: brightness(0.72); }
+  .coin-face:nth-child(5) { transform: translateZ(0px);   filter: brightness(0.65); }
+  .coin-face:nth-child(6) { transform: translateZ(-3px);  filter: brightness(0.72); }
+  .coin-face:nth-child(7) { transform: translateZ(-6px);  filter: brightness(0.82); }
+  .coin-face:nth-child(8) { transform: translateZ(-9px);  filter: brightness(0.92); }
+  .coin-face:nth-child(9) { transform: translateZ(-12px); filter: brightness(1.05) drop-shadow(0 0 25px rgba(237,201,103,.7)); }
+
+  @keyframes coinBounce {
+    0%, 100% { transform: translate3d(-50%, -50%, 0); }
+    50% { transform: translate3d(-50%, calc(-50% - 14px), 0); }
+  }
+  @keyframes coinSpin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+
+  /* L3: Foreground vortex re-overlay with circular hole around coin */
+  .hero-foreground{
+    position: absolute; inset: 0; z-index: 3;
+    background: url('assets/hero-desk.png') center/cover no-repeat;
+    mix-blend-mode: lighten;
+    opacity: .6;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle at 50% 32%, transparent 120px, black 190px);
+            mask-image: radial-gradient(circle at 50% 32%, transparent 120px, black 190px);
+  }
+
+  /* L4: bottom vignette for text legibility */
+  .hero-vignette{
+    position: absolute; inset: 0; z-index: 4;
+    background: linear-gradient(180deg, transparent 0%, transparent 50%, rgba(7,7,10,.75) 80%, var(--bg) 100%);
+    pointer-events: none;
+  }
+
+  /* removed legacy hero deco / side labels / mark-bg */
+  .hero-deco, .hero-side-label, .hero-mark-bg, .hero-grid-bg, .hero-glow, .hero-eyebrow, .hero-logo { display: none; }
 
   .hero-content{
     max-width: 1100px; margin: 0 auto;
-    position: relative; z-index: 2;
+    position: relative; z-index: 5;
     padding: 0 24px;
-  }
-  .hero-eyebrow{
-    display: inline-flex; align-items:center; gap: 14px;
-    margin-bottom: 36px;
-    opacity: 0; animation: fadeUp .9s .15s forwards;
+    margin-top: 240px;
   }
   .live-dot{
     display: inline-block; width:7px; height:7px; border-radius:50%;
@@ -233,9 +216,6 @@
     animation: pulse 1.6s ease-in-out infinite; margin-right: 4px;
   }
   @keyframes pulse{ 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
-
-  /* (removed: hero-logo styles) */
-  .hero-logo{ display: none; }
 
   h1.hero-title{
     font-family: 'Cinzel', serif;
@@ -802,22 +782,33 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-mark-bg" aria-hidden="true">
-    <img src="assets/logo-mark.png" alt="">
+  <div class="pocket-halo"></div>
+
+  <div class="floating-stage">
+    <div class="coin">
+      <div class="coin-face"></div>
+      <div class="coin-face"></div>
+      <div class="coin-face"></div>
+      <div class="coin-face"></div>
+      <div class="coin-face"></div>
+      <div class="coin-face"></div>
+      <div class="coin-face"></div>
+      <div class="coin-face"></div>
+      <div class="coin-face"></div>
+    </div>
   </div>
+
+  <div class="hero-foreground"></div>
+  <div class="hero-vignette"></div>
 
   <div class="wrap">
     <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="eyebrow gold"><span class="live-dot"></span>Premium Doors Open</span>
-      </div>
       <h1 class="hero-title">
         Build your edge.
         <span class="accent">Trade with the Ark.</span>
       </h1>
       <p class="hero-sub">
-        A private community of futures traders running the same simple model. Live every day. Real breakdowns. Members are getting funded.
+        A private community of futures traders running the same simple model. Live every day. Real breakdowns. Real results.
       </p>
       <div class="hero-ctas">
         <a href="https://whop.com/tradingark" class="btn btn-primary" target="_blank" rel="noopener">
