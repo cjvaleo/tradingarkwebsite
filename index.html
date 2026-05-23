@@ -134,7 +134,7 @@
       font-family: var(--font-mono);
       font-size: 0.75rem;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--cream-3);
     }
@@ -301,6 +301,94 @@
         transition-duration: 0.01ms !important;
       }
     }
+
+    /* ============================================================
+       PROBLEM / PROMISE — Step 4
+       No glow: solid --night-2 between two glow-heavy sections.
+       ============================================================ */
+    #problem {
+      background: var(--night-2);
+      border-top: 1px solid var(--carbon);
+      padding-block: clamp(80px, 12vh, 140px);
+    }
+
+    .problem-inner {
+      max-width: 1100px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .problem-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--g-ed);
+    }
+
+    .problem-headline {
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: var(--cream);
+      margin-top: 1.5rem;
+    }
+
+    .problem-headline .line-italic {
+      display: block;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
+      -webkit-background-clip: text;
+              background-clip: text;
+      -webkit-text-fill-color: transparent;
+              color: transparent;
+    }
+
+    .problem-body {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(18px, 1.5vw, 22px);
+      color: var(--cream-2);
+      line-height: 1.5;
+      max-width: 720px;
+      margin-top: 32px;
+    }
+
+    .problem-body .alt-gold {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
+      -webkit-background-clip: text;
+              background-clip: text;
+      -webkit-text-fill-color: transparent;
+              color: transparent;
+    }
+
+    .problem-body .why-bold {
+      font-weight: 600;
+      font-style: normal;
+      -webkit-text-fill-color: var(--cream);
+              color: var(--cream);
+      background: none;
+    }
+
+    .problem-pullquote {
+      border-top: 1px solid var(--carbon);
+      padding-top: 40px;
+      margin-top: 56px;
+    }
+
+    .problem-pullquote p {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--g-ed);
+    }
   </style>
 </head>
 
@@ -344,9 +432,25 @@
       <!-- TODO Step 3: eyebrow, headline w/ gold gradient + italic accent, subhead, 2 CTAs (Whop primary, Discord secondary), trust strip. -->
     </section>
 
-    <!-- 3. PROBLEM / PROMISE -->
+    <!-- 3. PROBLEM / PROMISE — Step 4 -->
     <section id="problem">
-      <!-- TODO: "Most traders are stuck in signal hell." → the alternative. One screen. -->
+      <div class="problem-inner">
+
+        <p class="problem-eyebrow">— THE PROBLEM</p>
+
+        <h2 class="problem-headline">
+          Most traders are stuck<span class="line-italic">in signal hell.</span>
+        </h2>
+
+        <p class="problem-body">
+          You buy alerts. The alerts hit. You can't replicate them. The next ones miss. You're back where you started — no process, no edge, no idea what just happened. <em class="alt-gold">Premium is the alternative:</em> a community that teaches you the <strong class="why-bold">why</strong> behind every setup, so you can run it without anyone telling you when to click.
+        </p>
+
+        <div class="problem-pullquote">
+          <p>— THE ALTERNATIVE IS PROCESS</p>
+        </div>
+
+      </div>
     </section>
 
     <!-- 4. WHAT YOU GET — Bento — Step 4 -->
