@@ -29,367 +29,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
 
-  <style>
-    /* ============================================================
-       BRAND TOKENS — locked, do not improvise
-       ============================================================ */
-    :root {
-      /* DUSK PALETTE */
-      --night:    #0A0806;  /* primary surface */
-      --night-2:  #14110D;  /* card surface */
-      --night-3:  #1C1812;  /* elevated */
-      --carbon:   #2A241C;  /* borders */
-
-      /* CREAM (text on dark) */
-      --cream:    #EDE6D6;  /* primary text */
-      --cream-2:  #C9C0AB;  /* secondary */
-      --cream-3:  #8A8068;  /* tertiary */
-      --cream-4:  #5A523F;  /* quiet */
-
-      /* GOLD (exact palette — do not adjust) */
-      --g-ae:     #AE8625;
-      --g-d2:     #D2AC47;
-      --g-ed:     #EDC967;
-      --g-f7:     #F7EF8A;
-      --g-92:     #926F34;
-
-      /* SEMANTIC */
-      --profit:   #7A9E5E;
-      --loss:     #B5564A;
-
-      /* TYPOGRAPHY */
-      --font-display: 'Fraunces', serif;
-      --font-sans:    'Inter', sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
-
-      /* LAYOUT */
-      --container: 1200px;
-      --gutter:    clamp(1rem, 4vw, 2rem);
-    }
-
-    /* ============================================================
-       RESET / BASE
-       ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-      margin: 0;
-      background: var(--night);
-      color: var(--cream);
-      font-family: var(--font-sans);
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-
-    img, svg, video { display: block; max-width: 100%; height: auto; }
-
-    a { color: inherit; text-decoration: none; }
-
-    button {
-      font: inherit;
-      cursor: pointer;
-      background: none;
-      border: 0;
-      color: inherit;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      margin: 0;
-    }
-
-    p { margin: 0; }
-    ul, ol { margin: 0; padding: 0; list-style: none; }
-
-    /* ============================================================
-       BRAND UTILITIES (locked treatments)
-       ============================================================ */
-    .gold-gradient {
-      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
-      -webkit-background-clip: text;
-              background-clip: text;
-      -webkit-text-fill-color: transparent;
-              color: transparent;
-    }
-
-    .italic-accent {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-    }
-
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--cream-3);
-    }
-
-    /* ============================================================
-       LAYOUT PRIMITIVES
-       ============================================================ */
-    .container {
-      width: 100%;
-      max-width: var(--container);
-      margin-inline: auto;
-      padding-inline: var(--gutter);
-    }
-
-    main > section { padding-block: clamp(4rem, 10vh, 8rem); }
-
-    /* ============================================================
-       BUTTONS — locked: no border-radius, gold = gradient + glow
-       ============================================================ */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.875rem 1.5rem;
-      font-family: var(--font-sans);
-      font-size: 0.875rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      line-height: 1;
-      border: 0;
-      border-radius: 0;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
-      color: var(--night);
-      box-shadow:
-        inset 0 0 0 1px rgba(247, 239, 138, 0.30),
-        0 8px 24px rgba(174, 134, 37, 0.22);
-    }
-
-    .btn-gold:hover {
-      filter: brightness(1.05);
-      transform: translateY(-1px);
-      box-shadow:
-        inset 0 0 0 1px rgba(247, 239, 138, 0.45),
-        0 12px 32px rgba(174, 134, 37, 0.32);
-    }
-
-    .btn-gold:active { transform: translateY(0); filter: brightness(0.98); }
-
-    /* ============================================================
-       NAV — sticky, transparent → solid on scroll
-       ============================================================ */
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      width: 100%;
-      background-color: transparent;
-      border-bottom: 1px solid transparent;
-      transition:
-        background-color 220ms ease,
-        border-color 220ms ease,
-        backdrop-filter 220ms ease;
-    }
-
-    .site-nav.is-scrolled {
-      background-color: var(--night-2);
-      border-bottom-color: var(--carbon);
-      backdrop-filter: saturate(140%);
-      -webkit-backdrop-filter: saturate(140%);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      padding-block: 1rem;
-    }
-
-    .nav-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.625rem;
-      color: var(--cream);
-    }
-
-    .nav-logo {
-      display: inline-flex;
-      width: 28px;
-      height: 28px;
-      flex: none;
-    }
-    .nav-logo svg { width: 100%; height: 100%; display: block; }
-
-    .nav-wordmark {
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: 1.0625rem;
-      letter-spacing: -0.005em;
-      color: var(--cream);
-      line-height: 1;
-    }
-
-    .nav-links ul {
-      display: flex;
-      align-items: center;
-      gap: 2.25rem;
-    }
-
-    .nav-links a {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--cream-3);
-      transition: color 160ms ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible { color: var(--g-ed); }
-
-    .nav-cta {
-      padding: 0.75rem 1.25rem;
-      font-size: 0.8125rem;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-inner { gap: 1rem; }
-      .nav-cta { padding: 0.6875rem 1rem; font-size: 0.75rem; }
-    }
-
-    /* ============================================================
-       ACCESSIBILITY
-       ============================================================ */
-    .sr-only {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--g-d2);
-      outline-offset: 2px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    /* ============================================================
-       PROBLEM / PROMISE — Step 4
-       No glow: solid --night-2 between two glow-heavy sections.
-       ============================================================ */
-    #problem {
-      background: var(--night-2);
-      border-top: 1px solid var(--carbon);
-      padding-block: clamp(80px, 12vh, 140px);
-    }
-
-    .problem-inner {
-      max-width: 1100px;
-      margin-inline: auto;
-      padding-inline: var(--gutter);
-    }
-
-    .problem-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--g-ed);
-    }
-
-    .problem-headline {
-      font-size: clamp(48px, 7vw, 96px);
-      font-weight: 400;
-      line-height: 0.92;
-      letter-spacing: -0.04em;
-      color: var(--cream);
-      margin-top: 1.5rem;
-    }
-
-    .problem-headline .line-italic {
-      display: block;
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
-      -webkit-background-clip: text;
-              background-clip: text;
-      -webkit-text-fill-color: transparent;
-              color: transparent;
-    }
-
-    .problem-body {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-size: clamp(18px, 1.5vw, 22px);
-      color: var(--cream-2);
-      line-height: 1.5;
-      max-width: 720px;
-      margin-top: 32px;
-    }
-
-    .problem-body .alt-gold {
-      font-style: italic;
-      background: linear-gradient(135deg, var(--g-f7), var(--g-ed), var(--g-ae));
-      -webkit-background-clip: text;
-              background-clip: text;
-      -webkit-text-fill-color: transparent;
-              color: transparent;
-    }
-
-    .problem-body .why-bold {
-      font-weight: 600;
-      font-style: normal;
-      -webkit-text-fill-color: var(--cream);
-              color: var(--cream);
-      background: none;
-    }
-
-    .problem-pullquote {
-      border-top: 1px solid var(--carbon);
-      padding-top: 40px;
-      margin-top: 56px;
-    }
-
-    .problem-pullquote p {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--g-ed);
-    }
-  </style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/styles.css" />
 </head>
 
 <body>
@@ -413,7 +54,7 @@
         <ul>
           <li><a href="#what-you-get">The Work</a></li>
           <li><a href="#pricing">Premium</a></li>
-          <li><a href="https://rewind.trading" target="_blank" rel="noopener">Rewind</a></li> <!-- TODO: confirm Rewind URL -->
+          <li><a href="#what-you-get">Rewind</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </nav>
@@ -453,9 +94,83 @@
       </div>
     </section>
 
-    <!-- 4. WHAT YOU GET — Bento — Step 4 -->
+    <!-- 4. WHAT YOU GET — Bento Grid — Step 5 -->
     <section id="what-you-get">
-      <!-- TODO Step 4: 6-box asymmetric bento grid (Live Calls / Weekly Education / Library / Rewind Journal / Community / Market Updates). -->
+      <div class="bento-container">
+
+        <header class="bento-header">
+          <p class="bento-eyebrow">— INSIDE PREMIUM</p>
+          <h2 class="bento-headline">
+            Everything in one<span class="line-italic">subscription.</span>
+          </h2>
+        </header>
+
+        <div class="bento-grid" role="list">
+
+          <!-- Box 1: Live Trading Calls -->
+          <div class="bento-box bento-box--1" role="listitem">
+            <div class="bento-meta">
+              <span class="bento-tag">
+                <span class="live-dot" aria-hidden="true"></span>— LIVE TRADING CALLS
+              </span>
+              <span class="bento-badge">Daily</span>
+            </div>
+            <h3 class="bento-title">Real-time calls.<span class="bento-title-italic">Real conditions.</span></h3>
+            <p class="bento-desc">Live sessions every market day. Real-time analysis, setup reviews, and Q&amp;A as conditions develop.</p>
+          </div>
+
+          <!-- Box 2: Weekly Education -->
+          <div class="bento-box bento-box--2" role="listitem">
+            <div class="bento-meta">
+              <span class="bento-tag">— WEEKLY EDUCATION</span>
+              <span class="bento-badge">1× Weekly</span>
+            </div>
+            <h3 class="bento-title">A focused session,<span class="bento-title-italic">every week.</span></h3>
+            <p class="bento-desc">One deep dive on a core trading topic — structure, risk, execution, psychology.</p>
+          </div>
+
+          <!-- Box 3: Education Library -->
+          <div class="bento-box bento-box--3" role="listitem">
+            <div class="bento-meta">
+              <span class="bento-tag">— EDUCATION LIBRARY</span>
+              <span class="bento-badge">On-Demand</span>
+            </div>
+            <h3 class="bento-title">The full library.<span class="bento-title-italic">All levels.</span></h3>
+            <p class="bento-desc">Step-by-step model breakdowns, strategy examples, and real trade recaps.</p>
+          </div>
+
+          <!-- Box 4: Rewind Journal — gold-bordered hero box -->
+          <div class="bento-box bento-box--rewind" role="listitem">
+            <div class="bento-meta">
+              <span class="bento-tag">— REWIND JOURNAL</span>
+              <span class="bento-badge bento-badge--star">★ INCLUDED</span>
+            </div>
+            <h3 class="bento-title">Log it.<span class="bento-title-italic">Get better.</span></h3>
+            <p class="bento-desc">A full trading journal platform — normally a paid tool — included with Premium. Track every trade with context and confluence.</p>
+          </div>
+
+          <!-- Box 5: Community Room -->
+          <div class="bento-box bento-box--5" role="listitem">
+            <div class="bento-meta">
+              <span class="bento-tag">— COMMUNITY ROOM</span>
+              <span class="bento-badge">Always On</span>
+            </div>
+            <h3 class="bento-title">The room<span class="bento-title-italic">around you.</span></h3>
+            <p class="bento-desc">Member discussions, trade reflections, and shared resources. The texture of being inside the Ark.</p>
+          </div>
+
+          <!-- Box 6: Daily Market Updates -->
+          <div class="bento-box bento-box--6" role="listitem">
+            <div class="bento-meta">
+              <span class="bento-tag">— DAILY MARKET UPDATES</span>
+              <span class="bento-badge">Daily</span>
+            </div>
+            <h3 class="bento-title">What to watch.<span class="bento-title-italic">Where it matters.</span></h3>
+            <p class="bento-desc">Pre-market analysis, key levels, and the setups we're tracking before the open.</p>
+          </div>
+
+        </div><!-- /.bento-grid -->
+      </div><!-- /.bento-container -->
     </section>
 
     <!-- 5. HOW IT WORKS — Step 5 -->
